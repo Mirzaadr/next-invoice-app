@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Invoice Platform
+This is a full stack Invoice application project built using [Next.js](https://nextjs.org).
+
+## Technology Stack
+
+- **Frontend**: Next.js, Tailwind CSS, ShadCN Components, Auth.js, Prisma (PostgreSQL ORM)
+- **Database**: PostgreSQL, managed with PgAdmin
 
 ## Getting Started
 
