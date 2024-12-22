@@ -1,9 +1,18 @@
+import LoginButton from "@/components/auth/LoginButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { auth, signIn } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const session = await auth();
+
+  if (session?.user) {
+    redirect('/dashboard')
+  }
+  
   return (
     <div className='flex h-screen w-full items-center justify-center px-4'>
       <Card className="max-w-sm">
@@ -14,17 +23,22 @@ const LoginPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action="" className="flex flex-col gap-y-4">
+          <form action={async (formData: FormData) => {
+            "use server"
+            await signIn("nodemailer", formData);
+          }} 
+          className="flex flex-col gap-y-4"
+          >
             <div className="flex flex-col gap-y-2">
               <Label>Email</Label>
               <Input 
+                name="email"
+                required
                 placeholder="test@mail.com"
                 type="email"
               />
             </div>
-            <Button>
-              Submit
-            </Button>
+            <LoginButton />
           </form>
         </CardContent>
       </Card>
