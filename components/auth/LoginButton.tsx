@@ -4,7 +4,13 @@ import { useFormStatus } from "react-dom";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react";
 
-const LoginButton = () => {
+interface SubmitButtonProps {
+  text?: string
+}
+
+const SubmitButton = ({
+  text
+}: SubmitButtonProps) => {
   const { pending } = useFormStatus()
 
   if (pending) {
@@ -17,9 +23,9 @@ const LoginButton = () => {
   }
   return (
     <Button type="submit" className="w-full">
-      Submit
+      {text || "Submit"}
     </Button>
   )
 }
 
-export default LoginButton;
+export default SubmitButton;
