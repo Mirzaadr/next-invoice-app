@@ -40,5 +40,7 @@ export async function createInvoice(prevState: any, formData:FormData) {
     }
   });
 
+  // TODO: send invoice email to client
+
   return redirect("/dashboard/invoices")
 }
