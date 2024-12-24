@@ -25,7 +25,7 @@ const InvoiceActions = ({
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/">
+          <Link href={`/api/invoice/${invoiceId}`} target="_blank">
             <DownloadCloudIcon className="size-4 mr-2" />
             Download Invoice
           </Link>
