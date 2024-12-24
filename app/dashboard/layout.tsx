@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/logo.svg"
 import DashboardLinks from "./_components/DashboardLinks";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, User2 } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -64,6 +64,7 @@ const DashboardLayout = async ({
       <div className="flex flex-col">
         <header className="flex h-14 px-3 items-center gap-4 border-b bg-muted/40 lg:h-[60px] lg:px-6">
           <Sheet>
+            <SheetTitle className="hidden" />
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="md:hidden">
                 <Menu className="size-5" />
