@@ -10,7 +10,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { CalendarIcon } from "lucide-react";
 import { useActionState, useState } from "react";
 import { Textarea } from "../ui/textarea";
-import SubmitButton from "../auth/LoginButton";
+import SubmitButton from "../auth/SubmitButton";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { invoiceSchema } from "@/lib/zodSchemas";

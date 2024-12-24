@@ -1,4 +1,4 @@
-import LoginButton from "@/components/auth/LoginButton";
+import LoginButton from "@/components/auth/SubmitButton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";

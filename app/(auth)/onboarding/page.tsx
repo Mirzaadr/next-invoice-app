@@ -1,6 +1,6 @@
 "use client"
 import { onboardUser } from "@/actions/onboarding";
-import SubmitButton from "@/components/auth/LoginButton";
+import SubmitButton from "@/components/auth/SubmitButton";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
