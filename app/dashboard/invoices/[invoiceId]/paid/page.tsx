@@ -32,7 +32,7 @@ const PaidInvoicePage = async ({
   await authorize(invoiceId, session.id as string);
   return (
     <div className='flex flex-1 justify-center items-center'>
-      <Card className="mx-w-[500px]">
+      <Card className="max-w-[500px]">
         <CardHeader>
           <CardTitle>Mark as Paid?</CardTitle>
           <CardDescription>
