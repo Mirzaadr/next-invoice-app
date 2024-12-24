@@ -72,7 +72,7 @@ const DashboardLayout = async ({
             </SheetTrigger>
             <SheetContent side="left">
               <nav className="grid gap-2 mt-10">
-                <DashboardLinks />
+                <DashboardLinks withSheetClose/>
               </nav>
             </SheetContent>
           </Sheet>
