@@ -14,23 +14,18 @@ import SubmitButton from "../auth/LoginButton";
 import { useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { invoiceSchema } from "@/lib/zodSchemas";
-import { createInvoice } from "@/actions/invoice";
+import { editInvoice } from "@/actions/invoice";
 import { formatCurrency } from "@/lib/formatCurrency";
+import { Prisma } from "@prisma/client";
 
-interface CreateInvoicesProps {
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
+interface EditInvoiceProps {
+  data: Prisma.InvoiceGetPayload<{}>;
 }
 
-const CreateInvoices = ({
-  firstName,
-  lastName,
-  email,
-  address,
-}: CreateInvoicesProps) => {
-  const [lastResult, action] = useActionState(createInvoice, undefined);
+const EditInvoice = ({
+  data,
+}: EditInvoiceProps) => {
+  const [lastResult, action] = useActionState(editInvoice, undefined);
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
@@ -40,19 +35,37 @@ const CreateInvoices = ({
     },
     shouldValidate: "onBlur",
     shouldRevalidate: "onInput",
+    defaultValue: {
+      invoiceName: data.invoiceName,
+      invoiceNumber: data.invoiceNumber,
+      fromName: data.fromName,
+      fromEmail: data.fromEmail,
+      fromAddress: data.fromAddress,
+      clientName: data.clientName,
+      clientEmail: data.clientEmail,
+      clientAddress: data.clientAddress,
+      // date: data.date.toString(),
+      dueDate: data.dueDate,
+      invoiceItemDescription: data.invoiceItemDescription,
+      // invoiceItemQuantity: data.invoiceItemQuantity,
+      // invoiceItemRate: data.invoiceItemRate,
+      // total: data.total,
+      note: data.note ?? undefined,
+    }
   });
 
-  const [rate, setRate] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [currency, setCurrency] = useState("USD");
+  const [selectedDate, setSelectedDate] = useState(data.date);
+  const [rate, setRate] = useState(data.invoiceItemRate.toString());
+  const [quantity, setQuantity] = useState(data.invoiceItemQuantity.toString());
+  const [currency, setCurrency] = useState(data.currency);
 
   const calculateTotal = (Number(quantity) || 0) * (Number(rate) || 0);
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <Card className="w-full max-w-4xl mx-auto">
       <CardContent className="p-6">
         <form id={form.id} action={action} onSubmit={form.onSubmit} noValidate>
+          <input type="hidden" name="id" value={data.id}/>
           <div className="flex flex-col gap-1 w-fit mb-6">
             <div className="flex items-center gap-4">
               <Badge variant="secondary">Draft</Badge>
@@ -117,14 +130,14 @@ const CreateInvoices = ({
                   placeholder="Your Name"
                   name={fields.fromName.name}
                   key={fields.fromName.key}
-                  defaultValue={`${firstName} ${lastName}`}
+                  defaultValue={fields.fromName.initialValue}
                 />
                 <p className="text-sm text-red-500">{fields.fromName.errors}</p>
                 <Input
                   placeholder="Your Email"
                   name={fields.fromEmail.name}
                   key={fields.fromEmail.key}
-                  defaultValue={email}
+                  defaultValue={fields.fromEmail.initialValue}
                 />
                 <p className="text-sm text-red-500">
                   {fields.fromEmail.errors}
@@ -133,7 +146,7 @@ const CreateInvoices = ({
                   placeholder="Your Address"
                   name={fields.fromAddress.name}
                   key={fields.fromAddress.key}
-                  defaultValue={address}
+                  defaultValue={fields.fromAddress.initialValue}
                 />
                 <p className="text-sm text-red-500">
                   {fields.fromAddress.errors}
@@ -318,13 +331,13 @@ const CreateInvoices = ({
 
           <div className="flex items-center justify-end mt-6">
             <div>
-              <SubmitButton text="Send Invoice to Client" />
+              <SubmitButton text="Update Invoice" />
             </div>
           </div>
         </form>
       </CardContent>
     </Card>
-  );
+  )
 }
 
-export default CreateInvoices;
+export default EditInvoice;
