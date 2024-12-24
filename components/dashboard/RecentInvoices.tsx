@@ -27,7 +27,7 @@ const RecentInvoices = async () => {
   const data = await getData(session.id as string);
 
   return (
-    <Card className='col-span-1'>
+    <Card className='xl:col-span-1'>
       <CardHeader>
         <CardTitle>Recent Invoices</CardTitle>
       </CardHeader>

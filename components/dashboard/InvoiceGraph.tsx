@@ -53,7 +53,7 @@ const InvoiceGraph = async () => {
   const session = await requireUser();
   const data = await getInvoices(session.id as string);
   return (
-    <Card className="lg:col-span-2">
+    <Card className="xl:col-span-2">
       <CardHeader>
         <CardTitle>Paid Invoices</CardTitle>
         <CardDescription>
