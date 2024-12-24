@@ -53,7 +53,7 @@ const InvoiceList = async () => {
               dateStyle: "medium"
             }).format(row.createdAt)}</TableCell>
             <TableCell className="text-right">
-              <InvoiceActions invoiceId={row.id}/>
+              <InvoiceActions invoiceId={row.id} status={row.status}/>
             </TableCell>
           </TableRow>
         ))}

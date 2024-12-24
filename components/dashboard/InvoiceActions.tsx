@@ -6,11 +6,13 @@ import Link from "next/link";
 import { toast } from "sonner";
 
 interface InvoiceActionsProps {
-  invoiceId?: string;
+  invoiceId: string;
+  status: string
 }
 
 const InvoiceActions = ({
-  invoiceId
+  invoiceId,
+  status,
 }: InvoiceActionsProps) => {
 
   const handleSendReminder = () => {
@@ -57,12 +59,14 @@ const InvoiceActions = ({
             Delete
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/">
-            <CheckCircle className="size-4 mr-2" />
-            Mark as Paid
-          </Link>
-        </DropdownMenuItem>
+        {status !== "PAID" && (
+          <DropdownMenuItem asChild>
+            <Link href={`/dashboard/invoices/${invoiceId}/paid`}>
+              <CheckCircle className="size-4 mr-2" />
+              Mark as Paid
+            </Link>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )
