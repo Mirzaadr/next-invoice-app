@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/public/logo.svg"
-import DashboardLinks from "./DashboardLinks";
+import DashboardLinks from "./_components/DashboardLinks";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu, User2 } from "lucide-react";
