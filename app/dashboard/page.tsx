@@ -36,7 +36,7 @@ const DashboardPage = async () => {
   return (
     <Suspense fallback={<DashboardSkeleton/>}>
       <DashboardBlocks />
-      <div className="grid gap-4 lg:grid-cols-3 md:gap-8">
+      <div className="grid gap-4 lg:grid-cols-3 md:gap-8 h-full">
         <InvoiceGraph />
         <RecentInvoices />
       </div>

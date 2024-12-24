@@ -2,6 +2,7 @@ import { prisma } from "@/lib/db";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import Graph from "./Graph";
 import { requireUser } from "@/lib/hooks";
+import EmptyState from "./EmptyState";
 
 async function getInvoices(userId: string) {
   const rawData = await prisma.invoice.findMany({
@@ -60,7 +61,16 @@ const InvoiceGraph = async () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Graph data={data}/>
+        {data.length < 1 ? (
+          <div className="h-[500px]">
+            <EmptyState
+              title="No data to show"
+              description="Complete some invoice to get analytics"
+            />
+          </div>
+        ) : (
+          <Graph data={data}/>
+        )}
       </CardContent>
     </Card>
   );

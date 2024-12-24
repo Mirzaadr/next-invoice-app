@@ -5,8 +5,8 @@ import { buttonVariants } from "../ui/button";
 interface EmptyStateProps {
   title: string;
   description: string;
-  buttonText: string;
-  href: string;
+  buttonText?: string;
+  href?: string;
 }
 
 const EmptyState = ({
@@ -22,9 +22,9 @@ const EmptyState = ({
       </div>
       <h2 className="mt-6 text-xl font-semibold ">{title}</h2>
       <p className="mb-8 mt-2 text-sm text-muted-foreground max-w-xm mx-auto text-center">{description}</p>
-      <Link href={href} className={buttonVariants()}>
+      {href && buttonText &&(<Link href={href} className={buttonVariants()}>
         <PlusCircle className="size-4 mr-2" /> {buttonText}
-      </Link>
+      </Link>)}
     </div>
   );
 }
