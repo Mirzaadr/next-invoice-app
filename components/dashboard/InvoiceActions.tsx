@@ -52,7 +52,7 @@ const InvoiceActions = ({
           Reminder Email
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/">
+          <Link href={`/dashboard/invoices/${invoiceId}/delete`}>
             <Trash className="size-4 mr-2" />
             Delete
           </Link>
