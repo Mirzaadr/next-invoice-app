@@ -4,6 +4,7 @@ import InvoiceActions from "./InvoiceActions";
 import { requireUser } from "@/lib/hooks";
 import { formatCurrency } from "@/lib/formatCurrency";
 import { Badge } from "../ui/badge";
+import EmptyState from "./EmptyState";
 async function getData(userId:string) {
   const data = await prisma.invoice.findMany({
     where: {
@@ -29,7 +30,18 @@ async function getData(userId:string) {
 const InvoiceList = async () => {
   const session = await requireUser();
   const data = await getData(session.id as string);
+  if (data.length === 0) {
+    return (
+      <EmptyState 
+        title="No Invoices found"
+        description="Create an invoice to get started"
+        buttonText="Create Invoice"
+        href="/dashboard/invoices/create"
+      />
+    );
+  }
   return (
+    <>
     <Table>
       <TableHeader>
         <TableRow>
@@ -59,6 +71,7 @@ const InvoiceList = async () => {
         ))}
       </TableBody>
     </Table>
+    </>
   )
 }
 
